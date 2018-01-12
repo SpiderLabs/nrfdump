@@ -5,7 +5,7 @@
 # that can be used to copy a memory address into a register 
 # and dumps the memory by (ab)using this instruction.  
 # Please be warned that for some (rather unusual) chip code 
-# and/or memory configurations, running this script can have
+# and/or memory configurations, running nrfdump can have
 # undesirable effects, ranging from the script not being able 
 # to find a usable instruction to misconfiguration of the device 
 # or even *BRICK*.
@@ -66,7 +66,7 @@ class NrfDump:
         # print resp
         m = re.search(': ([0-9A-Fa-f]+)', resp)
         if m and m.group(1):
-            self.known_address = '0x10001004'
+            self.known_address = addr
             self.known_value = '0x' + m.group(1).upper()
             print "[***] RBPCONF is: %s" % self.known_value
         else:
