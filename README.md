@@ -3,20 +3,21 @@
 Python script for dumping firmware from read-back protected nRF51 chips.
 
 The read-back protection of an nRF51 SoC protects the memory of the chip against direct read/write via SWD.
-However, it does not prevent read/write access to its registers (general-purpose / stack / program counter / ...).
+However, it does not prevent read/write access to its registers (general-purpose / stack pointer / program counter / ...).
 
 Thus it is possible to:
 1. Connect to the chip via SWD
 2. Find an instruction that copies data from memory to a register (for instance `ldr r4, [r4]`)
 3. Set program counter to the address of the memory-to-register copying instruction
-4. Set source register to an address N
+4. Set source register to address N
 5. Execute the instruction
-6. Increase source register value (N = N + 4)
-7. Repeat from 3.
+6. Read the destination register (data copied from the memory location)
+7. Increase source register (N = N + 4)
+8. Repeat from 3.
 
 nrfdump connects to OpenOCD GDB server, finds an instruction that can be used to copy a memory address into a register and dumps the memory by (ab)using this instruction.  
 
-Please note that although nrfdump worked perfectly for me during my project, it takes a bit of an opportunistic approach, ie. there are some things which can potentially go wrong.  
+Please note that although nrfdump worked perfectly for me during my project, it takes an opportunistic approach, ie. there are some things which can potentially go wrong.  
 They can range from the script not being able to find a usable instruction to misconfiguration of the device or even brick.  
 Use at your own risk!
 
