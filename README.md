@@ -57,4 +57,11 @@ Register out: r4
 
 [...]
 ```
+  
+  
+  
+This technique was earlier described in the following blog post:
+  
+[Firmware dumping technique for an ARM Cortex-M0 SoC](http://blog.includesecurity.com/2015/11/NordicSemi-ARM-SoC-Firmware-dumping-technique.html)
+  
 
